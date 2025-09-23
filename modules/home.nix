@@ -1,10 +1,17 @@
-{ pkgs, user, homeDir }:
 {
-  home.username = user;
-  home.homeDirectory = homeDir;
-  home.stateVersion = "25.05";
+  pkgs,
+  user,
+  homeDir,
+}: {
+  home = {
+    username = user;
+    homeDirectory = homeDir;
+    stateVersion = "25.05";
 
-  home.packages = with pkgs; [
+    packages = with pkgs; [
+    ];
 
-  ];
+    file = {
+    };
+  };
 }
