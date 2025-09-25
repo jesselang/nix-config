@@ -2,6 +2,7 @@
   self,
   darwin,
   home-manager,
+  dotfiles,
 }: {
   hostRev,
   platform,
@@ -55,7 +56,7 @@ darwin.lib.darwinSystem {
           useUserPackages = true;
           users.${user} = _:
             import ./home.nix {
-              inherit pkgs user;
+              inherit pkgs user dotfiles;
               homeDir = config.users.users.${user}.home;
             }
             // (let

@@ -4,6 +4,10 @@
   inputs = {
     nix-config.url = "github:jesselang/nix-config";
     flake-utils.follows = "nix-config/flake-utils";
+
+    local-nix-config.url = "git+file:../nix-config";
+    # local development: uncomment line below.
+    #nix-config.follows = "local-nix-config";
   };
 
   outputs = {
