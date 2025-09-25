@@ -18,6 +18,23 @@
         "type": "github"
       }
     },
+    "dotfiles": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1757346560,
+        "narHash": "sha256-poW+afxxr9EVM26JZlQooxP1rIxh7gxtTNV7erZxKL8=",
+        "owner": "jesselang",
+        "repo": "dotfiles",
+        "rev": "280cc598f9a050be6ec6e897f9fb4761024b342c",
+        "type": "github"
+      },
+      "original": {
+        "owner": "jesselang",
+        "ref": "feature/bare-repo",
+        "repo": "dotfiles",
+        "type": "github"
+      }
+    },
     "flake-utils": {
       "inputs": {
         "systems": "systems"
@@ -105,6 +122,7 @@
     "root": {
       "inputs": {
         "darwin": "darwin",
+        "dotfiles": "dotfiles",
         "flake-utils": "flake-utils",
         "home-manager": "home-manager",
         "nixpkgs": "nixpkgs_3"

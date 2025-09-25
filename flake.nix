@@ -6,6 +6,11 @@
     flake-utils.url = "github:numtide/flake-utils";
     darwin.url = "github:nix-darwin/nix-darwin";
     home-manager.url = "github:nix-community/home-manager";
+
+    dotfiles = {
+      url = "github:jesselang/dotfiles?ref=feature/bare-repo";
+      flake = false;
+    };
   };
 
   outputs = {
@@ -14,9 +19,12 @@
     flake-utils,
     darwin,
     home-manager,
+    dotfiles,
     ...
   }: let
-    mkDarwin = import ./modules/darwin.nix {inherit self darwin home-manager;};
+    mkDarwin = import ./modules/darwin.nix {
+      inherit self darwin home-manager dotfiles;
+    };
   in
     # provide flake formatters, checks, and dev shells to consumers.
     flake-utils.lib.eachDefaultSystem (
