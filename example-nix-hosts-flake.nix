@@ -5,8 +5,8 @@
     nix-config.url = "github:jesselang/nix-config";
     flake-utils.follows = "nix-config/flake-utils";
 
-    local-nix-config.url = "git+file:../nix-config";
-    # local development: uncomment line below.
+    # local development: uncomment lines below.
+    #local-nix-config.url = "git+file:../nix-config";
     #nix-config.follows = "local-nix-config";
   };
 
