@@ -60,13 +60,15 @@ darwin.lib.darwinSystem {
               homeDir = config.users.users.${user}.home;
             }
             // (let
+              unknown = "unknown";
               json = pkgs.formats.json {};
             in {
               xdg.dataFile."nix-config/meta.json".source = json.generate "meta.json" {
                 inherit hostRev;
-                nixConfigRev = self.rev or self.dirtyRev or "unknown";
+                nixConfigRev = self.rev or self.dirtyRev or unknown;
                 nixVersion = pkgs.nix.version;
-                nixDarwinRev = darwin.rev or darwin.dirtyRev or "unknown";
+                nixDarwinRev = darwin.rev or darwin.dirtyRev or unknown;
+                dotfilesRev = dotfiles.rev or dotfiles.dirtyRev or unknown;
               };
             });
         };
