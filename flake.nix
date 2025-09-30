@@ -2,7 +2,7 @@
   description = "nix configurations";
 
   inputs = {
-    nixpkgs.url = "github:NixOS/nixpkgs/nixos-25.05";
+    nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
     flake-utils.url = "github:numtide/flake-utils";
     darwin.url = "github:nix-darwin/nix-darwin";
     home-manager.url = "github:nix-community/home-manager";
