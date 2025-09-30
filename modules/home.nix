@@ -12,6 +12,12 @@ in {
     stateVersion = "25.05";
 
     packages = with pkgs; [
+      gitFull
+      gnugrep
+      jq
+      tree
+      unixtools.watch
+      vim
     ];
 
     file = dotlib.mkHomeFilesFromDotfiles {
