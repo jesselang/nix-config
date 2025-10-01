@@ -43,6 +43,12 @@ darwin.lib.darwinSystem {
         system.defaults = {
           dock.autohide = true;
         };
+
+        # system packages are linked into "/Applications/Nix Apps/" and
+        # available to spotlight, etc.
+        environment.systemPackages = with pkgs; [
+          stats
+        ];
       })
 
       home-manager.darwinModules.home-manager
@@ -54,23 +60,34 @@ darwin.lib.darwinSystem {
         home-manager = {
           useGlobalPkgs = true;
           useUserPackages = true;
-          users.${user} = _:
-            import ./home.nix {
-              inherit pkgs user dotfiles;
-              homeDir = config.users.users.${user}.home;
-            }
-            // (let
-              unknown = "unknown";
-              json = pkgs.formats.json {};
-            in {
-              xdg.dataFile."nix-config/meta.json".source = json.generate "meta.json" {
-                inherit hostRev;
-                nixConfigRev = self.rev or self.dirtyRev or unknown;
-                nixVersion = pkgs.nix.version;
-                nixDarwinRev = darwin.rev or darwin.dirtyRev or unknown;
-                dotfilesRev = dotfiles.rev or dotfiles.dirtyRev or unknown;
-              };
-            });
+          users.${user} = {...}: {
+            imports = [
+              (import ./home.nix {
+                inherit pkgs user dotfiles;
+                homeDir = config.users.users.${user}.home;
+              })
+
+              # darwin-specific nix packages
+              ({ pkgs, lib, ... }: {
+                home.packages = lib.mkAfter (with pkgs; [
+                  reattach-to-user-namespace
+                ]);
+              })
+
+              (let
+                unknown = "unknown";
+                json = pkgs.formats.json {};
+              in {
+                xdg.dataFile."nix-config/meta.json".source = json.generate "meta.json" {
+                  inherit hostRev;
+                  nixConfigRev = self.rev or self.dirtyRev or unknown;
+                  nixVersion = pkgs.nix.version;
+                  nixDarwinRev = darwin.rev or darwin.dirtyRev or unknown;
+                  dotfilesRev = dotfiles.rev or dotfiles.dirtyRev or unknown;
+                };
+              })
+            ];
+          };
         };
       })
     ]
