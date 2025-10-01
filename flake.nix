@@ -34,14 +34,17 @@
           inherit pkgs;
           src = ./.;
         };
+        shells = import ./shells.nix {inherit pkgs;};
       in {
         inherit (lint) formatter checks;
 
-        devShells = {
-          default = lint.devShell;
+        devShells =
+          shells
+          // {
+            default = lint.devShell;
 
-          lint = lint.devShell;
-        };
+            lint = lint.devShell;
+          };
       }
     )
     // {
