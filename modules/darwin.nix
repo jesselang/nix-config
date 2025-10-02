@@ -68,7 +68,11 @@ darwin.lib.darwinSystem {
               })
 
               # darwin-specific nix packages
-              ({ pkgs, lib, ... }: {
+              ({
+                pkgs,
+                lib,
+                ...
+              }: {
                 home.packages = lib.mkAfter (with pkgs; [
                   reattach-to-user-namespace
                 ]);
