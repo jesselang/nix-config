@@ -93,6 +93,7 @@ darwin.lib.darwinSystem {
             "hammerspoon"
             "elgato-control-center"
             "elgato-stream-deck"
+            "keepassx"
             "logitune"
             "logseq"
             "wacom-tablet"
