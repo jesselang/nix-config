@@ -1,6 +1,9 @@
 {
   self,
   darwin,
+  nix-homebrew,
+  homebrew-core,
+  homebrew-cask,
   home-manager,
   dotfiles,
 }: {
@@ -13,7 +16,34 @@
 darwin.lib.darwinSystem {
   modules =
     [
-      ({pkgs, ...}: {
+      nix-homebrew.darwinModules.nix-homebrew
+      {
+        nix-homebrew = {
+          inherit user;
+
+          enable = true;
+
+          # Apple Silicon Only: Also install Homebrew under the default Intel prefix for Rosetta 2
+          #enableRosetta = true;
+
+          # Optional: Declarative tap management
+          taps = {
+            "homebrew/homebrew-core" = homebrew-core;
+            "homebrew/homebrew-cask" = homebrew-cask;
+          };
+
+          # Optional: Enable fully-declarative tap management
+          #
+          # With mutableTaps disabled, taps can no longer be added imperatively with `brew tap`.
+          mutableTaps = false;
+        };
+      }
+
+      ({
+        config,
+        pkgs,
+        ...
+      }: {
         nix.settings.experimental-features = ["nix-command" "flakes"];
 
         system = {
@@ -42,6 +72,31 @@ darwin.lib.darwinSystem {
 
         system.defaults = {
           dock.autohide = true;
+        };
+
+        homebrew = {
+          enable = true;
+
+          onActivation = {
+            autoUpdate = true;
+            upgrade = true;
+            cleanup = "zap";
+          };
+
+          # use declarative taps from nix-homebrew
+          taps = builtins.attrNames config.nix-homebrew.taps;
+
+          brews = [];
+
+          casks = [
+            "drawio"
+            "hammerspoon"
+            "elgato-control-center"
+            "elgato-stream-deck"
+            "logitune"
+            "logseq"
+            "wacom-tablet"
+          ];
         };
 
         # system packages are linked into "/Applications/Nix Apps/" and
