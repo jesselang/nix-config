@@ -23,18 +23,11 @@ darwin.lib.darwinSystem {
 
           enable = true;
 
-          # Apple Silicon Only: Also install Homebrew under the default Intel prefix for Rosetta 2
-          #enableRosetta = true;
-
-          # Optional: Declarative tap management
           taps = {
             "homebrew/homebrew-core" = homebrew-core;
             "homebrew/homebrew-cask" = homebrew-cask;
           };
 
-          # Optional: Enable fully-declarative tap management
-          #
-          # With mutableTaps disabled, taps can no longer be added imperatively with `brew tap`.
           mutableTaps = false;
         };
       }
@@ -70,8 +63,22 @@ darwin.lib.darwinSystem {
 
         programs.zsh.enable = true;
 
-        system.defaults = {
-          dock.autohide = true;
+        system = {
+          defaults = {
+            dock.autohide = true;
+          };
+
+          # emulate "Prevent automatic sleeping on power adapter when the
+          # display is off" in system settings
+          activationScripts.pmsetACOnly.text = ''
+            # never sleep when on charger
+            /usr/bin/pmset -c sleep 0
+            /usr/bin/pmset -c displaysleep 15
+
+            # allow sleep when on battery
+            /usr/bin/pmset -b sleep 10
+            /usr/bin/pmset -b displaysleep 5
+          '';
         };
 
         homebrew = {
