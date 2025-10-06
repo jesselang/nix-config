@@ -66,6 +66,34 @@ darwin.lib.darwinSystem {
         system = {
           defaults = {
             dock.autohide = true;
+
+            CustomUserPreferences = {
+              "com.apple.HIToolbox" = import ./darwin-defaults-hitoolbox.nix;
+
+              # show keyboard layout at login
+              "com.apple.loginwindow".showInputMenu = true;
+            };
+
+            NSGlobalDomain = {
+              KeyRepeat = 2;
+              InitialKeyRepeat = 30;
+              ApplePressAndHoldEnabled = false;
+
+              # use keyboard hardware controls, use Fn for function keys
+              "com.apple.keyboard.fnState" = false;
+
+              # disable "smart" edits, thankyouverymuch
+              NSAutomaticSpellingCorrectionEnabled = false;
+              NSAutomaticCapitalizationEnabled = false;
+              NSAutomaticQuoteSubstitutionEnabled = false;
+              NSAutomaticDashSubstitutionEnabled = false;
+              NSAutomaticPeriodSubstitutionEnabled = false;
+            };
+          };
+
+          keyboard = {
+            enableKeyMapping = true;
+            remapCapsLockToEscape = true;
           };
 
           # emulate "Prevent automatic sleeping on power adapter when the
@@ -130,12 +158,12 @@ darwin.lib.darwinSystem {
                 homeDir = config.users.users.${user}.home;
               })
 
-              # darwin-specific nix packages
               ({
                 pkgs,
                 lib,
                 ...
               }: {
+                # darwin-specific nix packages
                 home.packages = lib.mkAfter (with pkgs; [
                   reattach-to-user-namespace
                 ]);
