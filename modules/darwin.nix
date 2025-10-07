@@ -75,6 +75,9 @@ darwin.lib.darwinSystem {
             };
 
             NSGlobalDomain = {
+              # 24 hour time format
+              AppleICUForce24HourTime = true;
+
               # dark mode
               AppleInterfaceStyle = "Dark";
               AppleInterfaceStyleSwitchesAutomatically = false;
