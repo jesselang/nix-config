@@ -75,6 +75,11 @@ darwin.lib.darwinSystem {
             };
 
             NSGlobalDomain = {
+              # dark mode
+              AppleInterfaceStyle = "Dark";
+              AppleInterfaceStyleSwitchesAutomatically = false;
+
+              # keyboard
               KeyRepeat = 2;
               InitialKeyRepeat = 30;
               ApplePressAndHoldEnabled = false;
