@@ -74,9 +74,18 @@ darwin.lib.darwinSystem {
               "com.apple.loginwindow".showInputMenu = true;
             };
 
+            "com.apple.menuextra.clock" = {
+              DateFormat = "EEE MMM d  HH:mm";
+              ShowDate = 1;
+              ShowDayOfWeek = true;
+              ShowSeconds = false;
+            };
+
             NSGlobalDomain = {
-              # 24 hour time format
               AppleICUForce24HourTime = true;
+              AppleMetricUnits = false;
+              AppleMeasurementUnits = "Inches";
+              AppleTemperatureUnit = "Fahrenheit";
 
               # dark mode
               AppleInterfaceStyle = "Dark";
