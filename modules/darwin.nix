@@ -65,7 +65,15 @@ darwin.lib.darwinSystem {
 
         system = {
           defaults = {
-            dock.autohide = true;
+            dock = {
+              autohide = true;
+              orientation = "right";
+            };
+
+            finder = {
+              # do not show icons on desktop
+              CreateDesktop = false;
+            };
 
             CustomUserPreferences = {
               "com.apple.HIToolbox" = import ./darwin-defaults-hitoolbox.nix;
@@ -113,6 +121,10 @@ darwin.lib.darwinSystem {
             remapCapsLockToEscape = true;
           };
 
+          "com.apple.menuextra.battery" = {
+            ShowPercent = "YES";
+          };
+
           # emulate "Prevent automatic sleeping on power adapter when the
           # display is off" in system settings
           activationScripts.pmsetACOnly.text = ''
@@ -124,6 +136,8 @@ darwin.lib.darwinSystem {
             /usr/bin/pmset -b sleep 10
             /usr/bin/pmset -b displaysleep 5
           '';
+
+          activationScripts.restartDock.text = "killall Dock || true";
         };
 
         homebrew = {
