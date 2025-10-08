@@ -121,10 +121,6 @@ darwin.lib.darwinSystem {
             remapCapsLockToEscape = true;
           };
 
-          "com.apple.menuextra.battery" = {
-            ShowPercent = "YES";
-          };
-
           # emulate "Prevent automatic sleeping on power adapter when the
           # display is off" in system settings
           activationScripts.pmsetACOnly.text = ''
