@@ -80,18 +80,18 @@ darwin.lib.darwinSystem {
 
               # show keyboard layout at login
               "com.apple.loginwindow".showInputMenu = true;
-            };
 
-            "com.apple.menuextra.clock" = {
-              DateFormat = "EEE MMM d  HH:mm";
-              ShowDate = 1;
-              ShowDayOfWeek = true;
-              ShowSeconds = false;
+              "com.apple.menuextra.clock" = {
+                DateFormat = "EEE MMM d  HH:mm";
+                ShowDate = 1;
+                ShowDayOfWeek = true;
+                ShowSeconds = false;
+              };
             };
 
             NSGlobalDomain = {
               AppleICUForce24HourTime = true;
-              AppleMetricUnits = false;
+              AppleMetricUnits = 0;
               AppleMeasurementUnits = "Inches";
               AppleTemperatureUnit = "Fahrenheit";
 
