@@ -5,9 +5,12 @@
     nix-config.url = "github:jesselang/nix-config";
     flake-utils.follows = "nix-config/flake-utils";
 
-    # local development: uncomment lines below.
-    #local-nix-config.url = "git+file:../nix-config";
-    #nix-config.follows = "local-nix-config";
+    dotfiles = {
+      url = "github:jesselang/dotfiles";
+      flake = false;
+    };
+
+    nix-config.inputs.dotfiles.follows = "dotfiles";
   };
 
   outputs = {
