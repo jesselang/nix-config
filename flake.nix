@@ -44,6 +44,11 @@
     flake-utils.lib.eachDefaultSystem (
       system: let
         pkgs = import nixpkgs {inherit system;};
+
+        apps = import ./apps.nix {
+          inherit pkgs flake-utils;
+        };
+
         lint = import ./lint.nix {
           inherit pkgs;
           src = ./.;
@@ -51,6 +56,7 @@
         shells = import ./shells.nix {inherit pkgs;};
       in {
         inherit (lint) formatter checks;
+        inherit apps;
 
         devShells =
           shells
