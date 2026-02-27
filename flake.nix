@@ -17,6 +17,11 @@
       url = "github:homebrew/homebrew-cask";
       flake = false;
     };
+
+    dotfiles = {
+      url = "github:jesselang/dotfiles";
+      flake = false;
+    };
   };
 
   outputs = {
