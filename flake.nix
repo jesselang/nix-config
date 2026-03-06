@@ -45,8 +45,8 @@
       system: let
         pkgs = import nixpkgs {inherit system;};
 
-        apps = import ./apps.nix {
-          inherit pkgs flake-utils;
+        helpers = import ./helpers.nix {
+          inherit pkgs;
         };
 
         lint = import ./lint.nix {
@@ -56,7 +56,7 @@
         shells = import ./shells.nix {inherit pkgs;};
       in {
         inherit (lint) formatter checks;
-        inherit apps;
+        inherit (helpers) apps packages;
 
         devShells =
           shells
