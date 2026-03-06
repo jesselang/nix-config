@@ -151,6 +151,7 @@ darwin.lib.darwinSystem {
           brews = [];
 
           casks = [
+            "background-music"
             "drawio"
             "hammerspoon"
             "elgato-control-center"
