@@ -152,10 +152,12 @@ darwin.lib.darwinSystem {
 
           casks = [
             "background-music"
+            "claude"
+            "claude-code"
             "drawio"
-            "hammerspoon"
             "elgato-control-center"
             "elgato-stream-deck"
+            "hammerspoon"
             "keepassx"
             "logitune"
             "logseq"
