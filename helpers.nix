@@ -17,8 +17,20 @@
   helpers;
 
   helpers = {
+    darwin-rebuild = {
+      description = "darwin-rebuild";
+      text = ''
+        [[ $(basename "$PWD") == nix-hosts ]] || {
+            echo "error: not in nix-hosts directory" >&2;
+            exit 1;
+        }
+
+        set -x
+        sudo darwin-rebuild switch --flake . "$@"
+      '';
+    };
     darwin-local = {
-      description = "darwin-rebuild against local repos";
+      description = "darwin-rebuild (local iteration)";
       text = ''
         [[ $(basename "$PWD") == nix-hosts ]] || {
             echo "error: not in nix-hosts directory" >&2;
