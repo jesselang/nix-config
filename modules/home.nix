@@ -17,6 +17,7 @@ in {
       jq
       tree
       unixtools.watch
+      uv
       vim
     ];
 
