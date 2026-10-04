@@ -12,6 +12,7 @@ in {
     stateVersion = "25.05";
 
     packages = with pkgs; [
+      gh
       gitFull
       gnugrep
       jq
