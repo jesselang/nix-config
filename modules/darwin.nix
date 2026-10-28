@@ -161,6 +161,7 @@ darwin.lib.darwinSystem {
             "keepassx"
             "logitune"
             "logseq"
+            "logseq-og"
             "wacom-tablet"
           ];
         };
